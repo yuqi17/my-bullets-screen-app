@@ -87,6 +87,12 @@ class BulletsScreen extends React.Component {
       });
     }
 
+    handleKeyDown = e => {
+      if(e.keyCode === 13){//enter 键
+        this.handleAdd()
+      }
+    }
+
     handleAdd = ()=>{
       const message = this.input.value
       this.input.value = ''
@@ -146,7 +152,7 @@ class BulletsScreen extends React.Component {
             <button onClick={this.handleClear}>clear up</button>
           </p>
           <p>
-            <textarea ref={input => this.input = input}/>
+            <textarea onKeyDown={this.handleKeyDown} ref={input => this.input = input}/>
             <button onClick={this.handleAdd}>add</button>
           </p>
         </div>
