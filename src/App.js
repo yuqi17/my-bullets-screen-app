@@ -2,6 +2,14 @@ import React from 'react'
 import style from './App.module.css'
 import RAF from './utils'
 
+function color16(){//十六进制颜色随机
+  var r = Math.floor(Math.random()*256);
+  var g = Math.floor(Math.random()*256);
+  var b = Math.floor(Math.random()*256);
+  var color = '#'+r.toString(16)+g.toString(16)+b.toString(16);
+  return color;
+}
+
 class BulletItem extends React.Component{
 
   static defaultProps = {
@@ -13,9 +21,15 @@ class BulletItem extends React.Component{
   }
 
   render(){
-    return (<div style={{'animation-play-state':this.props.playState, 'opacity':this.props.visible ? 1 : 0}} 
-    onAnimationEnd={this.props.onAnimationEnd(this.props.num)} 
-    className={style.item}>{this.props.text}</div>);
+
+    return (<div style={{
+        'animation-play-state':this.props.playState, 
+        'opacity':this.props.visible ? 1 : 0,
+        'top': `${this.props.top}px`,
+        'border-color':this.props.borderColor
+        }} 
+        onAnimationEnd={this.props.onAnimationEnd(this.props.num)} 
+        className={style.item}>{this.props.text}</div>);
   }
 }
 
@@ -28,12 +42,16 @@ class BulletsScreen extends React.Component {
       items:[{
         playState:'running',
         text:'hello',
-        visible:true
+        visible:true,
+        top:Math.random() * 100,
+        borderColor:color16()
       },
       {
         playState:'running',
         text:'world',
-        visible:true
+        visible:true,
+        top:Math.random() * 100,
+        borderColor:color16()
       }
     ],
       views:[],
@@ -75,7 +93,9 @@ class BulletsScreen extends React.Component {
           items:[...prevState.items, {
             text:'wahahaha',
             playState:'running',
-            visible:true
+            visible:true,
+            top:Math.random() * 100,
+            borderColor:color16()
           }]
         }
       })
