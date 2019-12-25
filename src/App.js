@@ -13,45 +13,33 @@ class BulletItem extends React.Component{
   }
 }
 
-let i = 0
-class BulletsScreen extends React.Component{
 
+class BulletsScreen extends React.Component {
+
+    timerId = 0
+    i = 0
     state = {
       items:['this is a test','phamacy','bullets','diarrhea'],
       views:[],
-      i:0
     }
 
     componentDidMount(){
-
-      // setInterval(()=>{
-      //   const { items } = this.state;
-      //   if(i < items.length){
-      //     this.setState(prevState => {
-      //       return {
-      //         views:[...prevState.views, prevState.items[i]]
-      //       }
-      //     });
-      //   }
-      //   i++;
-      // },1000)
-
-      RAF.setInterval(()=>{
+      this.timerId = RAF.setInterval(()=>{
           const { items } = this.state;
-          if(i < items.length){
+          if(this.i < items.length){
             this.setState(prevState => {
               return {
-                views:[...prevState.views, prevState.items[i]]
+                views:[...prevState.views, prevState.items[this.i]]
               }
             });
           }
-          i++;
+          this.i++;
         },1000)
     }
 
     handleAnimationEnd = num=>{
-      if(i > this.state.items.length){
-        i = 0;
+      if(this.i > this.state.items.length){
+        this.i = 0;
         return;
       }
       this.setState(prevState => {
@@ -69,6 +57,10 @@ class BulletsScreen extends React.Component{
       })
     }
 
+    handleStop = ()=>{
+
+    }
+
     render(){
       const { views } = this.state;
       return (
@@ -77,6 +69,7 @@ class BulletsScreen extends React.Component{
             {views.map((text, i) => <BulletItem onAnimationEnd={()=>this.handleAnimationEnd} num={i} key={i} text={text}/>)}
           </div>
           <p>
+            <button onClick={this.handleStop}>stop</button>
             <button onClick={this.handleClick}>add</button>
           </p>
         </div>
