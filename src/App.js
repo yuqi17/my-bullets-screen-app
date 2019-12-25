@@ -23,10 +23,10 @@ class BulletItem extends React.Component{
   render(){
 
     return (<div style={{
-        'animation-play-state':this.props.playState, 
+        'animationPlayState':this.props.playState, 
         'opacity':this.props.visible ? 1 : 0,
         'top': `${this.props.top}px`,
-        'border-color':this.props.borderColor
+        'borderColor':this.props.borderColor
         }} 
         onAnimationEnd={this.props.onAnimationEnd(this.props.num)} 
         className={style.item}>{this.props.text}</div>);
@@ -87,11 +87,13 @@ class BulletsScreen extends React.Component {
       });
     }
 
-    handleClick = ()=>{
+    handleAdd = ()=>{
+      const message = this.input.value
+      this.input.value = ''
       this.setState(prevState => {
         return {
           items:[...prevState.items, {
-            text:'wahahaha',
+            text:message,
             playState:'running',
             visible:true,
             top:Math.random() * 100,
@@ -99,6 +101,8 @@ class BulletsScreen extends React.Component {
           }]
         }
       })
+
+      // 
     }
 
     handleStop = ()=>{
@@ -139,8 +143,11 @@ class BulletsScreen extends React.Component {
           <p>
             <button onClick={this.handleStop}>pause</button>
             <button onClick={this.handleRun}>run</button>
-            <button onClick={this.handleClick}>add</button>
             <button onClick={this.handleClear}>clear up</button>
+          </p>
+          <p>
+            <textarea ref={input => this.input = input}/>
+            <button onClick={this.handleAdd}>add</button>
           </p>
         </div>
       );
