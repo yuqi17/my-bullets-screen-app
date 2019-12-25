@@ -1,0 +1,39 @@
+
+
+.list{
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 100px 0;
+  border: 4px solid gray;
+  overflow: hidden;
+}
+
+.wrap{
+  padding: 0 10px;
+}
+
+.item{
+  transform: translateX(100%);
+  right: 0;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 100px;
+  box-sizing: border-box;
+  text-align: center;
+  border: 1px solid red;
+  /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+  animation: move 8s linear 0s forwards;
+}
+
+@keyframes move{
+  0%{
+    transform: translateX(100%);
+  }
+  100%{
+    transform: translateX(-100vw);
+  }
+}

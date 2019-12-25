@@ -1,26 +1,88 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import style from './App.module.css'
+import RAF from './utils'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class BulletItem extends React.Component{
+
+  state = {
+    text:''
+  }
+
+  render(){
+    return (<div onAnimationEnd={this.props.onAnimationEnd(this.props.num)} className={style.item}>{this.props.text}</div>);
+  }
 }
 
-export default App;
+let i = 0
+class BulletsScreen extends React.Component{
+
+    state = {
+      items:['this is a test','phamacy','bullets','diarrhea'],
+      views:[],
+      i:0
+    }
+
+    componentDidMount(){
+
+      // setInterval(()=>{
+      //   const { items } = this.state;
+      //   if(i < items.length){
+      //     this.setState(prevState => {
+      //       return {
+      //         views:[...prevState.views, prevState.items[i]]
+      //       }
+      //     });
+      //   }
+      //   i++;
+      // },1000)
+
+      RAF.setInterval(()=>{
+          const { items } = this.state;
+          if(i < items.length){
+            this.setState(prevState => {
+              return {
+                views:[...prevState.views, prevState.items[i]]
+              }
+            });
+          }
+          i++;
+        },1000)
+    }
+
+    handleAnimationEnd = num=>{
+      if(i > this.state.items.length){
+        i = 0;
+        return;
+      }
+      this.setState(prevState => {
+        return {
+          views:prevState.views.filter((_,i) => i !== num)
+        }
+      });
+    }
+
+    handleClick = ()=>{
+      this.setState(prevState => {
+        return {
+          items:[...prevState.items, 'wahahaha']
+        }
+      })
+    }
+
+    render(){
+      const { views } = this.state;
+      return (
+        <div>
+            <div className={style.list}>
+            {views.map((text, i) => <BulletItem onAnimationEnd={()=>this.handleAnimationEnd} num={i} key={i} text={text}/>)}
+          </div>
+          <p>
+            <button onClick={this.handleClick}>add</button>
+          </p>
+        </div>
+        
+      );
+    }
+}
+
+export default BulletsScreen;
