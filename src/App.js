@@ -54,7 +54,7 @@ class BulletsScreen extends React.Component {
           });
         }
         this.i++;
-      },1000)
+      },800)// 时间决定了弹幕的间隔
     }
 
     handleAnimationEnd = num=>{
