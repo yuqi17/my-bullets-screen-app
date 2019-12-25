@@ -58,7 +58,8 @@ class BulletsScreen extends React.Component {
     }
 
     handleStop = ()=>{
-
+      alert(this.timerId)
+      RAF.clearInterval(this.timerId)
     }
 
     render(){
