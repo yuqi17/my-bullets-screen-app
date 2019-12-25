@@ -9,10 +9,6 @@
   overflow: hidden;
 }
 
-.wrap{
-  padding: 0 10px;
-}
-
 .item{
   transform: translateX(100%);
   right: 0;
