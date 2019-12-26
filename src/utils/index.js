@@ -1,4 +1,4 @@
-export default {
+export const RAF =  {
   intervalTimer: null,
   timeoutTimer: null,
   setTimeout(cb, interval) { // 实现setTimeout功能
@@ -38,4 +38,12 @@ export default {
   clearInterval() {
     cancelAnimationFrame(this.intervalTimer)
   }
+}
+
+export function color16(){//十六进制颜色随机
+  var r = Math.floor(Math.random()*256);
+  var g = Math.floor(Math.random()*256);
+  var b = Math.floor(Math.random()*256);
+  var color = '#'+r.toString(16)+g.toString(16)+b.toString(16);
+  return color;
 }
