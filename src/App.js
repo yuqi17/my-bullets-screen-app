@@ -145,13 +145,11 @@ class BulletsScreen extends React.Component {
           />)
           }
         </div>
-        <p>
+        <p className={style.controls}>
           <button onClick={this.handleStop}>pause</button>
           <button onClick={this.handleRun}>run</button>
           <button onClick={this.handleClear}>clear up</button>
-        </p>
-        <p>
-          <textarea onKeyDown={this.handleKeyDown} ref={input => this.input = input} />
+          <input onKeyDown={this.handleKeyDown} ref={input => this.input = input} />
           <button onClick={this.handleAdd}>add</button>
         </p>
       </div>

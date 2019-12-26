@@ -1,5 +1,14 @@
 
 
+@keyframes move{
+  0%{
+    transform: translateX(100%);
+  }
+  100%{
+    transform: translateX(-100vw);
+  }
+}
+
 .list{
   position: relative;
   display: flex;
@@ -25,11 +34,14 @@
   animation: move 8s linear 0s forwards;
 }
 
-@keyframes move{
-  0%{
-    transform: translateX(100%);
-  }
-  100%{
-    transform: translateX(-100vw);
-  }
+.controls{
+  display: flex;
+  justify-content: center;
 }
+
+.controls *{
+  margin: 0 10px;
+}
+
+
+
