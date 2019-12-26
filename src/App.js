@@ -33,28 +33,30 @@ class BulletItem extends React.Component {
 
 class BulletsScreen extends React.Component {
 
-  timerId = 0
+  timerId = 0;
 
-  i = 0
+  maxHeight = 200 * 2 - 30;
+
+  i = 0;
 
   state = {
     items: [{
       playState: 'running',
       text: 'hello',
       visible: true,
-      top: Math.random() * 100,
+      top: Math.random() * this.maxHeight,
       borderColor: color16()
     },
     {
       playState: 'running',
       text: 'world',
       visible: true,
-      top: Math.random() * 100,
+      top: Math.random() * this.maxHeight,
       borderColor: color16()
     }
     ],
     views: [],
-  }
+  };
 
   componentDidMount() {
     this.tick()
@@ -101,7 +103,7 @@ class BulletsScreen extends React.Component {
           text: message,
           playState: 'running',
           visible: true,
-          top: Math.random() * 100,
+          top: Math.random() * this.maxHeight,
           borderColor: color16()
         }]
       }
@@ -148,7 +150,7 @@ class BulletsScreen extends React.Component {
         <p className={style.controls}>
           <button onClick={this.handleStop}>pause</button>
           <button onClick={this.handleRun}>run</button>
-          <button onClick={this.handleClear}>clear up</button>
+          <button onClick={this.handleClear}>hide</button>
           <input onKeyDown={this.handleKeyDown} ref={input => this.input = input} />
           <button onClick={this.handleAdd}>add</button>
         </p>
