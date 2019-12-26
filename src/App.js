@@ -96,6 +96,9 @@ class BulletsScreen extends React.Component {
 
   handleAdd = () => {
     const message = this.input.value
+    
+    if(!message)return;
+
     this.input.value = ''
     this.setState(prevState => {
       return {
