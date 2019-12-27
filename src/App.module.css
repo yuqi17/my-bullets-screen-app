@@ -13,8 +13,50 @@
   0%{
     transform: translateX(-100%);
   }
+  50%{
+    transform: translateX(50vw);
+  }
+  60%{
+    transform: translateX(50vw) rotateZ(90deg);
+  }
   100%{
-    transform: translateX(100vw);
+    transform: translateX(100vw) rotateZ(360deg);
+  }
+}
+
+@keyframes flash{
+  0%{
+    box-shadow: 0px 0px 4px 1px #ccc;
+  }
+  10%{
+    box-shadow: 0px 0px 4px 10px #ccc;
+  }
+  20%{
+    box-shadow: 0px 0px 4px 1px #ccc;
+  }
+  30%{
+    box-shadow: 0px 0px 4px 10px #ccc;
+  }
+  40%{
+    box-shadow: 0px 0px 4px 1px #ccc;
+  }
+  50%{
+    box-shadow: 0px 0px 4px 10px #ccc;
+  }
+  60%{
+    box-shadow: 0px 0px 4px 1px #ccc;
+  }
+  70%{
+    box-shadow: 0px 0px 4px 10px #ccc;
+  }
+  80%{
+    box-shadow: 0px 0px 4px 1px #ccc;
+  }
+  90%{
+    box-shadow: 0px 0px 4px 10px #ccc;
+  }
+  100%{
+    box-shadow: 0px 0px 4px 1px #ccc;
   }
 }
 
@@ -45,7 +87,9 @@
   text-align: center;
   border: 2px solid;
   /* animation: name duration timing-function delay iteration-count direction fill-mode; */
-  animation: moveToRight 8s linear 0s forwards;
+  animation: moveToRight 8s linear 0s forwards,
+  flash  8s linear 0s forwards
+  ;
 }
 
 .controls{
