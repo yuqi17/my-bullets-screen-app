@@ -10,12 +10,7 @@ class BulletItem extends React.Component {
     playState: 'running'
   }
 
-  state = {
-    text: '',
-  }
-
   render() {
-
     return (
       <div style={{
         'animationPlayState': this.props.playState,
@@ -31,8 +26,7 @@ class BulletItem extends React.Component {
   }
 }
 
-const uri = 'http://192.168.1.100:3001';
-// const options = {  };
+const uri = 'http://192.168.1.101:3001';
 
 class BulletsScreen extends React.Component {
 
@@ -64,20 +58,15 @@ class BulletsScreen extends React.Component {
   componentDidMount() {
     this.tick()
     this.socket = io(uri)
-    this.socket.on('getMsg',msg=>{
-      console.log(msg)
+    this.socket.on('getData',items =>{
       this.setState(prevState => {
         return {
-          items: [...prevState.items, {
-            text: msg,
-            playState: 'running',
-            visible: true,
-            top: Math.random() * this.maxHeight,
-            borderColor: color16()
-          }]
+          items
         }
       })
     })
+    // 第一次广播
+    this.socket.emit('message-from-client',this.state.items)
   }
 
   tick() {
@@ -117,22 +106,19 @@ class BulletsScreen extends React.Component {
     
     if(!message)return;
 
-    this.socket.emit('message-from-client',message)
-
     this.input.value = ''
-    // this.setState(prevState => {
-    //   return {
-    //     items: [...prevState.items, {
-    //       text: message,
-    //       playState: 'running',
-    //       visible: true,
-    //       top: Math.random() * this.maxHeight,
-    //       borderColor: color16()
-    //     }]
-    //   }
-    // })
-
-    // 
+    this.setState({
+        items: [...this.state.items, {
+          text: message,
+          playState: 'running',
+          visible: true,
+          top: Math.random() * this.maxHeight,
+          borderColor: color16()
+        }]
+      },(prevState)=>{
+        // 同步整个字幕
+        this.socket.emit('message-from-client',this.state.items)
+      })
   }
 
   handleStop = () => {
