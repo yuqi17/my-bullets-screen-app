@@ -31,8 +31,8 @@ class BulletItem extends React.Component {
   }
 }
 
-const uri = 'http://localhost:3001';
-const options = {  };
+const uri = 'http://192.168.1.100:3001';
+// const options = {  };
 
 class BulletsScreen extends React.Component {
 
@@ -63,9 +63,20 @@ class BulletsScreen extends React.Component {
 
   componentDidMount() {
     this.tick()
-    const socket = io(uri)
-    socket.on('getMsg',msg=>{
-      alert()
+    this.socket = io(uri)
+    this.socket.on('getMsg',msg=>{
+      console.log(msg)
+      this.setState(prevState => {
+        return {
+          items: [...prevState.items, {
+            text: msg,
+            playState: 'running',
+            visible: true,
+            top: Math.random() * this.maxHeight,
+            borderColor: color16()
+          }]
+        }
+      })
     })
   }
 
@@ -106,18 +117,20 @@ class BulletsScreen extends React.Component {
     
     if(!message)return;
 
+    this.socket.emit('message-from-client',message)
+
     this.input.value = ''
-    this.setState(prevState => {
-      return {
-        items: [...prevState.items, {
-          text: message,
-          playState: 'running',
-          visible: true,
-          top: Math.random() * this.maxHeight,
-          borderColor: color16()
-        }]
-      }
-    })
+    // this.setState(prevState => {
+    //   return {
+    //     items: [...prevState.items, {
+    //       text: message,
+    //       playState: 'running',
+    //       visible: true,
+    //       top: Math.random() * this.maxHeight,
+    //       borderColor: color16()
+    //     }]
+    //   }
+    // })
 
     // 
   }
