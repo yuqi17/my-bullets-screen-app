@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './App.module.css'
 import { RAF, color16 } from './utils'
+import { Socket, Event } from 'react-socket-io';
 
 
 class BulletItem extends React.Component {
@@ -30,6 +31,8 @@ class BulletItem extends React.Component {
   }
 }
 
+const uri = 'http://localhost:3001';
+const options = { transports: ['websocket'] };
 
 class BulletsScreen extends React.Component {
 
@@ -140,7 +143,7 @@ class BulletsScreen extends React.Component {
   render() {
     const { views } = this.state;
     return (
-      <div>
+      <Socket uri={uri} options={options}>
         <div className={style.list}>
           {views.map((data, i) => <BulletItem
             {...data}
@@ -157,7 +160,7 @@ class BulletsScreen extends React.Component {
           <input onKeyDown={this.handleKeyDown} ref={input => this.input = input} />
           <button onClick={this.handleAdd}>add</button>
         </p>
-      </div>
+      </Socket>
     );
   }
 }
