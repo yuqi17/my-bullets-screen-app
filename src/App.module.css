@@ -11,13 +11,13 @@
 
 @keyframes moveToRight{
   0%{
-    transform: translateX(-100%);
+    transform: translateX(-100%) scale(1);
   }
   50%{
-    transform: translateX(50vw);
+    transform: translateX(50vw) scale(1);
   }
   75%{
-    transform: translateX(50vw);
+    transform: translateX(50vw) scale(2);
   }
   100%{
     transform: translateX(100vw);
