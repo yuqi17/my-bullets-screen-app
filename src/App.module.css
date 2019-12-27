@@ -35,13 +35,28 @@
 }
 
 .controls{
-  display: flex;
-  justify-content: center;
+  text-align: center;
 }
 
 .controls *{
   margin: 0 10px;
+  
+}
+
+.controls > button{
+  background-color: #00bebe;
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #fff;
 }
 
 
+.controls > input{
+  border: 1px solid #666;
+  padding: 5px 10px;
+  border-radius: 4px;
+  outline: none;
+}
 
