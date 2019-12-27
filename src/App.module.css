@@ -16,11 +16,11 @@
   50%{
     transform: translateX(50vw);
   }
-  60%{
-    transform: translateX(50vw) rotateZ(90deg);
+  75%{
+    transform: translateX(50vw);
   }
   100%{
-    transform: translateX(100vw) rotateZ(360deg);
+    transform: translateX(100vw);
   }
 }
 
