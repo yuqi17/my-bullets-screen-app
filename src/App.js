@@ -26,7 +26,7 @@ class BulletItem extends React.Component {
   }
 }
 
-const uri = 'http://192.168.1.101:3001';
+const uri = 'http://localhost:3001' //'http://192.168.1.101:3001';
 
 class BulletsScreen extends React.Component {
 
@@ -58,7 +58,7 @@ class BulletsScreen extends React.Component {
   componentDidMount() {
     this.tick()
     this.socket = io(uri)
-    this.socket.on('getData',items =>{
+    this.socket.on('getData', items => {
       this.setState(prevState => {
         return {
           items
@@ -66,7 +66,7 @@ class BulletsScreen extends React.Component {
       })
     })
     // 第一次广播
-    this.socket.emit('message-from-client',this.state.items)
+    this.socket.emit('message-from-client', this.state.items)
   }
 
   tick() {
@@ -103,22 +103,22 @@ class BulletsScreen extends React.Component {
 
   handleAdd = () => {
     const message = this.input.value
-    
-    if(!message)return;
+
+    if (!message) return;
 
     this.input.value = ''
     this.setState({
-        items: [...this.state.items, {
-          text: message,
-          playState: 'running',
-          visible: true,
-          top: Math.random() * this.maxHeight,
-          borderColor: color16()
-        }]
-      },(prevState)=>{
-        // 同步整个字幕
-        this.socket.emit('message-from-client',this.state.items)
-      })
+      items: [...this.state.items, {
+        text: message,
+        playState: 'running',
+        visible: true,
+        top: Math.random() * this.maxHeight,
+        borderColor: color16()
+      }]
+    }, (prevState) => {
+      // 同步整个字幕
+      this.socket.emit('message-from-client', this.state.items)
+    })
   }
 
   handleStop = () => {
@@ -142,7 +142,7 @@ class BulletsScreen extends React.Component {
     });
   }
 
-  handleMessage(){
+  handleMessage() {
     alert()
   }
 
@@ -167,7 +167,7 @@ class BulletsScreen extends React.Component {
           <input onKeyDown={this.handleKeyDown} ref={input => this.input = input} />
           <button onClick={this.handleAdd}>add</button>
         </p>
-        </div>
+      </div>
     );
   }
 }
