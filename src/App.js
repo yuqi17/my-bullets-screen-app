@@ -53,6 +53,7 @@ class BulletsScreen extends React.Component {
     }
     ],
     views: [],
+    op: 'run'
   };
 
   componentDidMount() {
@@ -146,9 +147,23 @@ class BulletsScreen extends React.Component {
     alert()
   }
 
+  handleClick = () => {
+    if (this.state.op === 'run') {
+      this.handleStop();
+      this.setState({
+        op: 'pause'
+      })
+    } else {
+      this.handleRun();
+      this.setState({
+        op: 'run'
+      })
+    }
+  }
+
 
   render() {
-    const { views } = this.state;
+    const { views, op } = this.state;
     return (
       <div>
         <div className={style.list}>
@@ -161,8 +176,9 @@ class BulletsScreen extends React.Component {
           }
         </div>
         <p className={style.controls}>
-          <button onClick={this.handleStop}>pause</button>
-          <button onClick={this.handleRun}>run</button>
+          {/* <button onClick={this.handleStop}>pause</button>
+          <button onClick={this.handleRun}>run</button> */}
+          <button onClick={this.handleClick}>{op === 'run' ? 'run' : 'pause'}</button>
           <button onClick={this.handleClear}>hide</button>
           <input onKeyDown={this.handleKeyDown} ref={input => this.input = input} />
           <button onClick={this.handleAdd}>add</button>
